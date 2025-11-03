@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :lockable, :timeoutable and :omniauthable
+  # :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :trackable
+         :confirmable, :trackable, :omniauthable,
+         omniauth_providers: [:github, :google_oauth2, :facebook, :twitter2]
 
   # Prefixed IDs
   has_prefix_id :user
@@ -15,6 +16,9 @@ class User < ApplicationRecord
   has_many :account_users, dependent: :destroy
   has_many :accounts, through: :account_users
   has_many :owned_accounts, class_name: "Account", foreign_key: :owner_id, dependent: :destroy
+
+  # OAuth Connected Accounts
+  has_many :connected_accounts, as: :owner, dependent: :destroy
 
   # Notifications
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"

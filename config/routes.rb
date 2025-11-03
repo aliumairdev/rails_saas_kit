@@ -95,6 +95,16 @@ Rails.application.routes.draw do
   # API v1 routes
   namespace :api do
     namespace :v1 do
+      # Authentication endpoint (no auth required)
+      post "auth", to: "auth#create"
+
+      # Current user endpoint
+      resource :me, only: [:show], controller: "me"
+
+      # Accounts
+      resources :accounts, only: [:index, :show]
+
+      # Application-specific resources (examples)
       resources :campaigns, only: [:index, :show, :create]
       resources :customers, only: [:index, :show, :create]
       resources :review_requests, only: [:index, :show, :create]

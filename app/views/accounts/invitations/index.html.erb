@@ -1,0 +1,129 @@
+<div class="py-6">
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900">Team Invitations</h1>
+      <p class="mt-2 text-sm text-gray-600">Manage pending team invitations for <%= Current.account.name %></p>
+    </div>
+    <%= link_to "Invite Team Member", new_account_invitation_path(Current.account), class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700" %>
+  </div>
+
+  <!-- Pending Invitations -->
+  <div class="bg-white shadow sm:rounded-lg mb-6">
+    <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+      <h3 class="text-lg font-medium leading-6 text-gray-900">Pending Invitations</h3>
+      <p class="mt-1 text-sm text-gray-500">Invitations that haven't been accepted yet</p>
+    </div>
+
+    <% if @pending_invitations.any? %>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Invitee
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Role
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Invited By
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Sent
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Expires
+              </th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Actions</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @pending_invitations.each do |invitation| %>
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4">
+                  <div class="text-sm font-medium text-gray-900"><%= invitation.name %></div>
+                  <div class="text-sm text-gray-500"><%= invitation.email %></div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    <%= invitation.role.titleize %>
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= invitation.invited_by.full_name %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= time_ago_in_words(invitation.created_at) %> ago
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <%= time_ago_in_words(invitation.expires_at) %>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <%= button_to "Resend", resend_account_invitation_path(Current.account, invitation), method: :post, class: "text-blue-600 hover:text-blue-900 mr-3" %>
+                  <%= button_to "Cancel", account_invitation_path(Current.account, invitation), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="px-4 py-12 text-center">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No pending invitations</h3>
+        <p class="mt-1 text-sm text-gray-500">Invite team members to collaborate on this account.</p>
+        <div class="mt-6">
+          <%= link_to "Invite Team Member", new_account_invitation_path(Current.account), class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Expired Invitations -->
+  <% if @expired_invitations.any? %>
+    <div class="bg-white shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Recent Expired Invitations</h3>
+        <p class="mt-1 text-sm text-gray-500">These invitations have expired and can be resent</p>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Invitee
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Expired
+              </th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Actions</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @expired_invitations.each do |invitation| %>
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4">
+                  <div class="text-sm font-medium text-gray-900"><%= invitation.name %></div>
+                  <div class="text-sm text-gray-500"><%= invitation.email %></div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600">
+                  <%= time_ago_in_words(invitation.expires_at) %> ago
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <%= button_to "Resend", resend_account_invitation_path(Current.account, invitation), method: :post, class: "text-blue-600 hover:text-blue-900" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+</div>

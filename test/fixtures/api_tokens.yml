@@ -1,0 +1,24 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: Development Token
+  token: <%= ApiToken.hash_token("test_token_one") %>
+  last_used_at: <%= 1.day.ago %>
+
+two:
+  user: two
+  name: Production Token
+  token: <%= ApiToken.hash_token("test_token_two") %>
+  last_used_at: <%= 1.hour.ago %>
+
+expired:
+  user: one
+  name: Expired Token
+  token: <%= ApiToken.hash_token("expired_token") %>
+  expires_at: <%= 1.day.ago %>
+
+admin_token:
+  user: admin
+  name: Admin Token
+  token: <%= ApiToken.hash_token("admin_token") %>

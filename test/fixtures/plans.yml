@@ -1,0 +1,59 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+free:
+  name: Free
+  amount: 0
+  interval: month
+  interval_count: 1
+  currency: usd
+  hidden: false
+  details:
+    max_requests: 100
+    max_campaigns: 5
+
+starter:
+  name: Starter
+  amount: 990
+  interval: month
+  interval_count: 1
+  currency: usd
+  stripe_id: price_starter_monthly
+  hidden: false
+  details:
+    max_requests: 1000
+    max_campaigns: 20
+
+pro:
+  name: Pro
+  amount: 2900
+  interval: month
+  interval_count: 1
+  currency: usd
+  stripe_id: price_pro_monthly
+  hidden: false
+  details:
+    max_requests: 5000
+    max_campaigns: 100
+
+enterprise:
+  name: Enterprise
+  amount: 9900
+  interval: month
+  interval_count: 1
+  currency: usd
+  stripe_id: price_enterprise_monthly
+  hidden: false
+  details:
+    max_requests: 99999
+    max_campaigns: 9999
+
+hidden_plan:
+  name: Legacy Plan
+  amount: 1500
+  interval: month
+  interval_count: 1
+  currency: usd
+  hidden: true
+  details:
+    max_requests: 500
+    max_campaigns: 10

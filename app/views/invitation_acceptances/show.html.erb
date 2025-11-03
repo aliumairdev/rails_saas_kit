@@ -1,0 +1,80 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div class="text-center">
+      <h2 class="text-3xl font-bold text-gray-900">Team Invitation</h2>
+    </div>
+
+    <% if @error %>
+      <div class="rounded-md bg-red-50 p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-red-800"><%= @error %></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <%= link_to "Return to Home", root_path, class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700" %>
+      </div>
+    <% else %>
+      <div class="bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+            You've been invited to join <%= @invitation.account.name %>!
+          </h3>
+
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div class="ml-3">
+                <div class="text-sm text-blue-700">
+                  <p><strong><%= @invitation.invited_by.full_name %></strong> has invited you to collaborate on <strong><%= @invitation.account.name %></strong>.</p>
+                  <p class="mt-2">Role: <strong><%= @invitation.role.titleize %></strong></p>
+                  <p class="mt-2 text-xs">Expires: <%= @invitation.expires_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <p class="text-sm text-gray-600">
+              As a <%= @invitation.role %>, you'll be able to:
+            </p>
+            <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1">
+              <li>Manage review collection campaigns</li>
+              <li>View and manage customers</li>
+              <li>Track review requests and responses</li>
+              <% if @invitation.role == "admin" %>
+                <li>Invite and manage team members</li>
+                <li>Configure account settings</li>
+              <% end %>
+            </ul>
+          </div>
+
+          <%= form_with url: accept_invitation_path(token: @invitation.token), method: :post, class: "mt-6" do |form| %>
+            <%= form.submit "Accept Invitation", class: "w-full inline-flex justify-center items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+          <% end %>
+
+          <% if user_signed_in? %>
+            <p class="mt-4 text-center text-sm text-gray-500">
+              Signed in as <%= current_user.email %>
+            </p>
+          <% else %>
+            <p class="mt-4 text-center text-sm text-gray-500">
+              Already have an account? <%= link_to "Sign in", new_user_session_path, class: "text-blue-600 hover:text-blue-700" %> to accept this invitation.
+            </p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

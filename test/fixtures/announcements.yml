@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+published:
+  title: New Feature Released
+  kind: info
+  published_at: <%= 1.day.ago %>
+
+draft:
+  title: Upcoming Maintenance
+  kind: warning
+  published_at: null
+
+urgent:
+  title: Security Update
+  kind: success
+  published_at: <%= 1.hour.ago %>

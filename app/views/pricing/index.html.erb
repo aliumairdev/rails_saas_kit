@@ -1,0 +1,112 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="text-center">
+    <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">
+      Simple, transparent pricing
+    </h1>
+    <p class="mt-4 text-xl text-gray-600">
+      Choose the plan that works best for your business
+    </p>
+  </div>
+
+  <div class="mt-16 grid gap-8 lg:grid-cols-4 lg:gap-x-8">
+    <% @plans.each do |plan| %>
+      <div class="relative flex flex-col rounded-2xl border <%= plan.name == 'Pro' ? 'border-primary-500 ring-2 ring-primary-500' : 'border-gray-200' %> bg-white p-8 shadow-sm">
+        <% if plan.name == 'Pro' %>
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+            <span class="inline-flex rounded-full bg-primary-500 px-4 py-1 text-sm font-semibold text-white">
+              Most Popular
+            </span>
+          </div>
+        <% end %>
+
+        <div class="flex-1">
+          <h3 class="text-xl font-semibold text-gray-900"><%= plan.name %></h3>
+
+          <p class="mt-4 flex items-baseline text-gray-900">
+            <span class="text-5xl font-bold tracking-tight">$<%= plan.amount_in_dollars.to_i %></span>
+            <span class="ml-1 text-xl font-semibold">/<%= plan.interval %></span>
+          </p>
+
+          <ul role="list" class="mt-6 space-y-4">
+            <li class="flex">
+              <svg class="h-6 w-6 flex-shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              <span class="ml-3 text-gray-700">
+                <%= plan.unlimited_requests? ? 'Unlimited' : number_with_delimiter(plan.max_requests) %> review requests
+              </span>
+            </li>
+            <li class="flex">
+              <svg class="h-6 w-6 flex-shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              <span class="ml-3 text-gray-700">
+                <%= plan.unlimited_campaigns? ? 'Unlimited' : number_with_delimiter(plan.max_campaigns) %> campaigns
+              </span>
+            </li>
+            <li class="flex">
+              <svg class="h-6 w-6 flex-shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              <span class="ml-3 text-gray-700">
+                Email & SMS notifications
+              </span>
+            </li>
+            <li class="flex">
+              <svg class="h-6 w-6 flex-shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              <span class="ml-3 text-gray-700">
+                Analytics & reporting
+              </span>
+            </li>
+            <% if plan.name == 'Pro' || plan.name == 'Enterprise' %>
+              <li class="flex">
+                <svg class="h-6 w-6 flex-shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                <span class="ml-3 text-gray-700">
+                  Priority support
+                </span>
+              </li>
+            <% end %>
+            <% if plan.name == 'Enterprise' %>
+              <li class="flex">
+                <svg class="h-6 w-6 flex-shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                <span class="ml-3 text-gray-700">
+                  Custom integrations
+                </span>
+              </li>
+              <li class="flex">
+                <svg class="h-6 w-6 flex-shrink-0 text-primary-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                <span class="ml-3 text-gray-700">
+                  Dedicated account manager
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <% if user_signed_in? %>
+          <% if Current.account %>
+            <%= link_to "Choose #{plan.name}", account_billing_path(Current.account, plan_id: plan.id), class: "mt-8 block w-full rounded-md px-3 py-2 text-center text-sm font-semibold #{plan.name == 'Pro' ? 'bg-primary-600 text-white hover:bg-primary-500' : 'bg-white text-primary-600 ring-1 ring-inset ring-primary-200 hover:ring-primary-300'} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600" %>
+          <% else %>
+            <%= link_to "Get started", new_account_path, class: "mt-8 block w-full rounded-md px-3 py-2 text-center text-sm font-semibold #{plan.name == 'Pro' ? 'bg-primary-600 text-white hover:bg-primary-500' : 'bg-white text-primary-600 ring-1 ring-inset ring-primary-200 hover:ring-primary-300'} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600" %>
+          <% end %>
+        <% else %>
+          <%= link_to "Get started", new_user_registration_path, class: "mt-8 block w-full rounded-md px-3 py-2 text-center text-sm font-semibold #{plan.name == 'Pro' ? 'bg-primary-600 text-white hover:bg-primary-500' : 'bg-white text-primary-600 ring-1 ring-inset ring-primary-200 hover:ring-primary-300'} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-16 text-center">
+    <p class="text-base text-gray-600">
+      All plans include a 14-day free trial. No credit card required.
+    </p>
+  </div>
+</div>

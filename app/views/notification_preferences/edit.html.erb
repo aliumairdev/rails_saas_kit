@@ -1,0 +1,99 @@
+<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <h1 class="text-3xl font-bold text-gray-900 mb-8">Notification Preferences</h1>
+
+  <%= form_with model: @user, url: notification_preferences_path, method: :patch, local: true do |f| %>
+    <div class="bg-white shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+          Email Notifications
+        </h3>
+
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <%= check_box_tag "notifications[email]", "true", @preferences.fetch("email", true), class: "focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded" %>
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="notifications_email" class="font-medium text-gray-700">
+                Enable email notifications
+              </label>
+              <p class="text-gray-500">Receive notifications via email</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <%= check_box_tag "notifications[review_clicked]", "true", @preferences.fetch("review_clicked", true), class: "focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded" %>
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="notifications_review_clicked" class="font-medium text-gray-700">
+                Review clicked notifications
+              </label>
+              <p class="text-gray-500">Get notified when customers click your review links</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <%= check_box_tag "notifications[request_limit]", "true", @preferences.fetch("request_limit", true), class: "focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded" %>
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="notifications_request_limit" class="font-medium text-gray-700">
+                Request limit warnings
+              </label>
+              <p class="text-gray-500">Get alerts when approaching your monthly request limit</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <%= check_box_tag "notifications[payment_failed]", "true", @preferences.fetch("payment_failed", true), class: "focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded" %>
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="notifications_payment_failed" class="font-medium text-gray-700">
+                Payment notifications
+              </label>
+              <p class="text-gray-500">Get notified about payment issues</p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <%= check_box_tag "notifications[weekly_summary]", "true", @preferences.fetch("weekly_summary", true), class: "focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded" %>
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="notifications_weekly_summary" class="font-medium text-gray-700">
+                Weekly summary
+              </label>
+              <p class="text-gray-500">Receive a weekly summary of your campaign performance</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-4 py-5 sm:p-6 border-t border-gray-200">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+          In-App Notifications
+        </h3>
+
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <%= check_box_tag "notifications[in_app]", "true", @preferences.fetch("in_app", true), class: "focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded" %>
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="notifications_in_app" class="font-medium text-gray-700">
+                Enable in-app notifications
+              </label>
+              <p class="text-gray-500">Show notifications in the notification bell</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 rounded-b-lg">
+        <%= f.submit "Save Preferences", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      </div>
+    </div>
+  <% end %>
+</div>

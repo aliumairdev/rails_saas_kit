@@ -1,0 +1,13 @@
+<%= @notification.email_subject %>
+
+Hi <%= @recipient.first_name || @recipient.name %>,
+
+<%= @notification.message %>
+
+<% if @notification.url.present? && @notification.url != "#" %>
+View details: <%= @notification.url %>
+<% end %>
+
+---
+Review Collector
+You're receiving this because you have notifications enabled for your account.

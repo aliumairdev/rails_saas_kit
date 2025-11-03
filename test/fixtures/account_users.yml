@@ -1,0 +1,36 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one_personal:
+  account: personal_one
+  user: one
+  roles: {}
+
+two_personal:
+  account: personal_two
+  user: two
+  roles: {}
+
+one_team_owner:
+  account: team
+  user: one
+  roles: { admin: true }
+
+two_team_member:
+  account: team
+  user: two
+  roles: {}
+
+admin_account_user:
+  account: admin_account
+  user: admin
+  roles: {}
+
+two_team_two_owner:
+  account: team_two
+  user: two
+  roles: { admin: true }
+
+with_2fa_personal:
+  account: personal_2fa
+  user: with_2fa
+  roles: {}

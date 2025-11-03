@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Review Collector" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-50">
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <h1 class="text-xl font-bold text-gray-900">Review Collector</h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <% if user_signed_in? %>
+              <%# Account Switcher %>
+              <% if Current.account && current_user.accounts.count > 1 %>
+                <div class="relative" data-controller="dropdown">
+                  <button type="button" class="flex items-center text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" data-action="click->dropdown#toggle click@window->dropdown#hide">
+                    <%= Current.account.name %>
+                    <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                  <div class="hidden absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" data-dropdown-target="menu">
+                    <div class="py-1" role="menu">
+                      <% current_user.accounts.each do |account| %>
+                        <%= button_to account.name, switch_account_path(account), method: :post, class: "#{Current.account&.id == account.id ? 'bg-gray-100' : ''} block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
+                      <% end %>
+                      <div class="border-t border-gray-100"></div>
+                      <%= link_to "Manage Accounts", accounts_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
+                      <%= link_to "Create New Account", new_account_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
+                    </div>
+                  </div>
+                </div>
+              <% elsif Current.account %>
+                <%= link_to Current.account.name, accounts_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+              <% end %>
+
+              <%= link_to "Dashboard", dashboard_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+              <%= link_to "Pricing", pricing_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+
+              <%# Notification Bell %>
+              <% unread_count = current_user.notifications.unread.count %>
+              <%= link_to notifications_path, class: "relative text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md" do %>
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                </svg>
+                <% if unread_count > 0 %>
+                  <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                    <%= unread_count > 9 ? '9+' : unread_count %>
+                  </span>
+                <% end %>
+              <% end %>
+
+              <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium", data: { turbo: false } %>
+            <% else %>
+              <%= link_to "Pricing", pricing_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+              <%= link_to "Sign In", new_user_session_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+              <%= link_to "Sign Up", new_user_registration_path, class: "bg-primary-600 text-white hover:bg-primary-700 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <% if notice || alert %>
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <% if notice %>
+          <div class="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline"><%= notice %></span>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline"><%= alert %></span>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <%= yield %>
+    </main>
+  </body>
+</html>

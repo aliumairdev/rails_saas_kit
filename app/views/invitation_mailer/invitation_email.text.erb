@@ -1,0 +1,21 @@
+You've been invited to join <%= @account.name %> on Review Collector!
+
+Hi <%= @invitation.name %>,
+
+<%= @inviter.full_name %> (<%= @inviter.email %>) has invited you to join <%= @account.name %> on Review Collector.
+
+Account: <%= @account.name %>
+Role: <%= @invitation.role.titleize %>
+
+As a <%= @invitation.role %>, you'll be able to collaborate on review collection campaigns and manage customer feedback.
+
+To accept this invitation, click the link below or copy and paste it into your browser:
+
+<%= @accept_url %>
+
+⏰ This invitation expires on <%= @invitation.expires_at.strftime("%B %d, %Y at %I:%M %p") %>
+
+If you didn't expect this invitation, you can safely ignore this email.
+
+---
+© <%= Time.current.year %> Review Collector. All rights reserved.

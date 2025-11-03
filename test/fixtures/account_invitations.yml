@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+pending:
+  account: team
+  invited_by_id: <%= ActiveRecord::FixtureSet.identify(:one, :users) %>
+  token: <%= SecureRandom.urlsafe_base64 %>
+  name: Bob Johnson
+  email: bob@example.com
+  roles: {}
+  expires_at: <%= 7.days.from_now %>
+
+accepted:
+  account: team
+  invited_by_id: <%= ActiveRecord::FixtureSet.identify(:one, :users) %>
+  token: <%= SecureRandom.urlsafe_base64 %>
+  name: Alice Brown
+  email: alice@example.com
+  roles: { admin: true }
+  expires_at: <%= 7.days.from_now %>
+  accepted_at: <%= 2.days.ago %>
+
+expired:
+  account: team
+  invited_by_id: <%= ActiveRecord::FixtureSet.identify(:one, :users) %>
+  token: <%= SecureRandom.urlsafe_base64 %>
+  name: Charlie Davis
+  email: charlie@example.com
+  roles: {}
+  expires_at: <%= 1.day.ago %>

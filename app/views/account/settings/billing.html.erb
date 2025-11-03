@@ -1,0 +1,12 @@
+<% content_for :title, "Billing Settings" %>
+
+<div class="max-w-4xl">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">Billing Settings</h1>
+    <p class="mt-1 text-sm text-gray-600">Manage your subscription and billing information</p>
+  </div>
+
+  <%= link_to "View Full Billing Dashboard →",
+        account_billing_path(@account),
+        class: "inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition" %>
+</div>

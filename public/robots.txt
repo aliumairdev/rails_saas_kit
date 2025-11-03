@@ -1,0 +1,13 @@
+# Robots.txt for Review Collector
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /dashboard
+Disallow: /accounts
+Disallow: /campaigns
+Disallow: /customers
+Disallow: /review_requests
+Disallow: /api_tokens
+
+Sitemap: https://reviewcollector.com/sitemap.xml

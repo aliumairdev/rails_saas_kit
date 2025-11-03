@@ -1,0 +1,228 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Subscription & Billing</h1>
+    <p class="mt-2 text-gray-600">Manage your subscription plan and billing information</p>
+  </div>
+
+  <% if params[:checkout_success] %>
+    <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
+      <p class="font-medium">✓ Subscription activated successfully!</p>
+      <p class="text-sm mt-1">Your account has been upgraded. Thank you for subscribing!</p>
+    </div>
+  <% end %>
+
+  <!-- Current Subscription Status -->
+  <div class="bg-white shadow rounded-lg p-6 mb-8">
+    <h2 class="text-xl font-semibold mb-4">Current Plan</h2>
+
+    <% if @subscription %>
+      <div class="border-l-4 border-blue-500 pl-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-gray-900"><%= @current_plan&.name || "Active Subscription" %></h3>
+            <p class="text-gray-600 mt-1">
+              <% if @account.on_trial? %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                  Trial Active
+                </span>
+                Trial ends <%= @subscription.trial_ends_at&.strftime("%B %d, %Y") %>
+              <% else %>
+                <%= number_to_currency(@current_plan&.amount_in_dollars || 0) %> / <%= @current_plan&.interval_name || "month" %>
+              <% end %>
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+              Status: <span class="font-medium capitalize"><%= @subscription.status %></span>
+            </p>
+          </div>
+
+          <div class="text-right">
+            <% if @subscription.active? %>
+              <%= button_to "Manage Subscription",
+                    "#",
+                    method: :post,
+                    class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Plan Features -->
+      <% if @current_plan %>
+        <div class="mt-6 grid grid-cols-2 gap-4">
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <p class="text-sm text-gray-600">Review Requests</p>
+            <p class="text-2xl font-bold text-gray-900">
+              <% if @current_plan.unlimited_requests? %>
+                Unlimited
+              <% else %>
+                <%= @current_plan.max_requests %>
+              <% end %>
+              <span class="text-sm font-normal text-gray-600">/ month</span>
+            </p>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <p class="text-sm text-gray-600">Active Campaigns</p>
+            <p class="text-2xl font-bold text-gray-900">
+              <% if @current_plan.unlimited_campaigns? %>
+                Unlimited
+              <% else %>
+                <%= @current_plan.max_campaigns %>
+              <% end %>
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <p class="text-sm font-medium text-gray-700 mb-2">Included Features:</p>
+          <ul class="space-y-2">
+            <% if @current_plan.feature("email_support") %>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                Email Support
+              </li>
+            <% end %>
+            <% if @current_plan.feature("widget_enabled") %>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                Review Widget
+              </li>
+            <% end %>
+            <% if @current_plan.feature("priority_support") %>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                Priority Support
+              </li>
+            <% end %>
+            <% if @current_plan.feature("api_access") %>
+              <li class="flex items-center text-sm text-gray-600">
+                <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                API Access
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+    <% else %>
+      <!-- No Active Subscription -->
+      <div class="text-center py-8">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No active subscription</h3>
+        <p class="mt-1 text-sm text-gray-500">Get started by choosing a plan below</p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Available Plans -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold mb-6">Available Plans</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <% @plans.each do |plan| %>
+        <div class="bg-white border-2 <%= @current_plan == plan ? 'border-blue-500' : 'border-gray-200' %> rounded-lg p-6 relative">
+          <% if @current_plan == plan %>
+            <div class="absolute top-0 right-0 bg-blue-500 text-white px-3 py-1 text-xs font-medium rounded-bl-lg rounded-tr-lg">
+              Current Plan
+            </div>
+          <% end %>
+
+          <h3 class="text-xl font-bold text-gray-900"><%= plan.name %></h3>
+          <p class="mt-2 text-gray-600 text-sm min-h-[48px]"><%= plan.description %></p>
+
+          <div class="mt-4">
+            <span class="text-4xl font-bold text-gray-900"><%= number_to_currency(plan.amount_in_dollars) %></span>
+            <span class="text-gray-600">/ <%= plan.interval_name %></span>
+          </div>
+
+          <ul class="mt-6 space-y-3">
+            <li class="flex items-start text-sm">
+              <svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>
+                <% if plan.unlimited_requests? %>
+                  Unlimited review requests
+                <% else %>
+                  <%= plan.max_requests %> review requests / month
+                <% end %>
+              </span>
+            </li>
+            <li class="flex items-start text-sm">
+              <svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span>
+                <% if plan.unlimited_campaigns? %>
+                  Unlimited campaigns
+                <% else %>
+                  Up to <%= plan.max_campaigns %> active campaigns
+                <% end %>
+              </span>
+            </li>
+            <% if plan.feature("email_support") %>
+              <li class="flex items-start text-sm">
+                <svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                Email support
+              </li>
+            <% end %>
+            <% if plan.feature("widget_enabled") %>
+              <li class="flex items-start text-sm">
+                <svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                Review widget
+              </li>
+            <% end %>
+            <% if plan.feature("priority_support") %>
+              <li class="flex items-start text-sm">
+                <svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                Priority support
+              </li>
+            <% end %>
+            <% if plan.feature("api_access") %>
+              <li class="flex items-start text-sm">
+                <svg class="h-5 w-5 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                API access
+              </li>
+            <% end %>
+          </ul>
+
+          <div class="mt-6">
+            <% if @current_plan == plan %>
+              <button disabled class="w-full bg-gray-100 text-gray-400 px-4 py-2 rounded-lg font-medium cursor-not-allowed">
+                Current Plan
+              </button>
+            <% else %>
+              <%= link_to "Choose #{plan.name}",
+                    new_account_billing_path(@account, plan_id: plan.id),
+                    class: "block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Billing History (placeholder) -->
+  <div class="bg-white shadow rounded-lg p-6">
+    <h2 class="text-xl font-semibold mb-4">Billing History</h2>
+    <p class="text-gray-600 text-sm">Your payment history will appear here</p>
+  </div>
+</div>

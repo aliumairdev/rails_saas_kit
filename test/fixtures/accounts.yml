@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+personal_one:
+  name: John's Personal Account
+  owner: one
+  personal: true
+
+personal_two:
+  name: Jane's Personal Account
+  owner: two
+  personal: true
+
+team:
+  name: Team Account
+  owner: one
+  personal: false
+
+admin_account:
+  name: Admin Account
+  owner: admin
+  personal: true
+
+team_two:
+  name: Another Team
+  owner: two
+  personal: false
+
+personal_2fa:
+  name: Secure User's Account
+  owner: with_2fa
+  personal: true

@@ -1,0 +1,117 @@
+<div class="max-w-3xl mx-auto">
+  <div class="sm:flex sm:items-center sm:justify-between mb-6">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900">Edit Account</h1>
+      <p class="mt-2 text-sm text-gray-700">Update your account information</p>
+    </div>
+    <%= link_to "Back to Account", account_path(@account), class: "mt-4 sm:mt-0 inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50" %>
+  </div>
+
+  <div class="bg-white shadow rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <%= form_with model: @account, class: "space-y-6" do |f| %>
+        <% if @account.errors.any? %>
+          <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded" role="alert">
+            <p class="font-medium mb-2"><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</p>
+            <ul class="list-disc list-inside">
+              <% @account.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Account Name -->
+        <div>
+          <%= f.label :name, "Account Name", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_field :name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm", placeholder: "My Company" %>
+          <p class="mt-1 text-sm text-gray-500">This is the name of your account or organization</p>
+        </div>
+
+        <!-- Logo Upload -->
+        <div>
+          <%= f.label :logo, "Logo", class: "block text-sm font-medium text-gray-700" %>
+
+          <% if @account.logo.attached? %>
+            <div class="mt-2 mb-3">
+              <%= image_tag @account.logo.variant(:medium), class: "h-32 w-32 object-cover rounded-lg" %>
+            </div>
+          <% end %>
+
+          <%= f.file_field :logo,
+              accept: "image/png,image/jpg,image/jpeg,image/gif,image/webp,image/svg+xml",
+              class: "mt-1 block w-full text-sm text-gray-500
+                      file:mr-4 file:py-2 file:px-4
+                      file:rounded-md file:border-0
+                      file:text-sm file:font-medium
+                      file:bg-primary-50 file:text-primary-700
+                      hover:file:bg-primary-100" %>
+          <p class="mt-1 text-sm text-gray-500">PNG, JPG, GIF, WEBP, or SVG. Max 5MB.</p>
+        </div>
+
+        <!-- Subdomain -->
+        <div>
+          <%= f.label :subdomain, "Subdomain (optional)", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_field :subdomain, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm", placeholder: "my-company" %>
+          <p class="mt-1 text-sm text-gray-500">
+            <% if @account.subdomain.present? %>
+              Your account is accessible at: <span class="font-medium"><%= @account.subdomain %>.reviewcollector.com</span>
+            <% else %>
+              If set, your account will be accessible at a custom subdomain
+            <% end %>
+          </p>
+        </div>
+
+        <!-- Billing Email -->
+        <div>
+          <%= f.label :billing_email, "Billing Email (optional)", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.email_field :billing_email, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm", placeholder: "billing@company.com" %>
+          <p class="mt-1 text-sm text-gray-500">Where should we send billing-related emails?</p>
+        </div>
+
+        <!-- Extra Billing Info -->
+        <div>
+          <%= f.label :extra_billing_info, "Additional Billing Information (optional)", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_area :extra_billing_info,
+              rows: 4,
+              class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm",
+              placeholder: "VAT number, company address, purchase order number, etc." %>
+          <p class="mt-1 text-sm text-gray-500">This information will appear on your invoices</p>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+          <div>
+            <% if can?(:destroy, @account) && !@account.personal %>
+              <%= link_to "Delete Account", account_path(@account),
+                  data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this account? This action cannot be undone and will remove all associated data." },
+                  class: "text-red-600 hover:text-red-800 text-sm font-medium" %>
+            <% end %>
+          </div>
+
+          <div class="flex space-x-3">
+            <%= link_to "Cancel", account_path(@account), class: "px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" %>
+            <%= f.submit "Save Changes", class: "inline-flex justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Danger Zone for Team Accounts -->
+  <% if !@account.personal && can?(:destroy, @account) %>
+    <div class="mt-6 bg-white shadow rounded-lg border-2 border-red-200">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg font-medium text-red-900 mb-2">Danger Zone</h3>
+        <p class="text-sm text-gray-600 mb-4">
+          Once you delete an account, there is no going back. Please be certain.
+        </p>
+        <%= button_to "Delete This Account",
+            account_path(@account),
+            method: :delete,
+            data: { turbo_confirm: "Are you absolutely sure? Type the account name '#{@account.name}' to confirm.\n\nThis will permanently delete:\n• All account data\n• All team members\n• All campaigns and review requests\n• All billing information\n\nThis action CANNOT be undone!" },
+            class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
+      </div>
+    </div>
+  <% end %>
+</div>

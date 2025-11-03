@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   draw :madmin
   devise_for :users, controllers: {
     registrations: "users/registrations",
-    sessions: "users/sessions"
+    sessions: "users/sessions",
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
 
   # Two-Factor Authentication
@@ -13,6 +14,9 @@ Rails.application.routes.draw do
     end
     resource :otp, only: [:show, :create]
   end
+
+  # Connected Accounts (OAuth)
+  resources :connected_accounts, only: [:index, :destroy]
 
   # Authenticated routes
   authenticated :user do
@@ -91,6 +95,16 @@ Rails.application.routes.draw do
   # API v1 routes
   namespace :api do
     namespace :v1 do
+      # Authentication endpoint (no auth required)
+      post "auth", to: "auth#create"
+
+      # Current user endpoint
+      resource :me, only: [:show], controller: "me"
+
+      # Accounts
+      resources :accounts, only: [:index, :show]
+
+      # Application-specific resources (examples)
       resources :campaigns, only: [:index, :show, :create]
       resources :customers, only: [:index, :show, :create]
       resources :review_requests, only: [:index, :show, :create]

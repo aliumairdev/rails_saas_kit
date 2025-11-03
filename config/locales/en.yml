@@ -29,3 +29,38 @@
 
 en:
   hello: "Hello world"
+
+  # OAuth translations
+  oauth:
+    github: "GitHub"
+    google_oauth2: "Google"
+    facebook: "Facebook"
+    twitter2: "Twitter"
+    sign_in_with: "Sign in with %{provider}"
+    connect: "Connect %{provider}"
+    disconnect: "Disconnect"
+    connected: "Connected"
+    not_connected: "Not connected"
+
+  connected_accounts:
+    index:
+      title: "Connected Accounts"
+      description: "Manage your social login connections"
+      provider: "Provider"
+      status: "Status"
+      actions: "Actions"
+      connect_new: "Connect a new account"
+      no_accounts: "You haven't connected any social accounts yet."
+    destroy:
+      success: "%{provider} account disconnected successfully"
+      error: "Failed to disconnect account"
+
+  devise:
+    shared:
+      links:
+        sign_in: "Sign in"
+        sign_up: "Sign up"
+        forgot_your_password: "Forgot your password?"
+        didn_t_receive_confirmation_instructions: "Didn't receive confirmation instructions?"
+        didn_t_receive_unlock_instructions: "Didn't receive unlock instructions?"
+        sign_in_with_provider: "Sign in with %{provider}"

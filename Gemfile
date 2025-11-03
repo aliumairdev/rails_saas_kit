@@ -43,6 +43,14 @@ gem "image_processing", "~> 1.2"
 gem "devise", github: "excid3/devise", branch: "sign-in-after-reset-password-proc"
 gem "devise-i18n", "~> 1.10"
 
+# OAuth / Social Login
+gem "omniauth", "~> 2.1"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "omniauth-github", "~> 2.0"
+gem "omniauth-google-oauth2", "~> 1.1"
+gem "omniauth-facebook", "~> 10.0"
+gem "omniauth-twitter2", "~> 0.1.0"
+
 # Authorization
 gem "pundit", "~> 2.1"
 

@@ -292,6 +292,54 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  # Configure OmniAuth providers
+  # To enable a provider, add credentials to config/credentials.yml.enc:
+  # omniauth:
+  #   github:
+  #     client_id: your_client_id
+  #     client_secret: your_client_secret
+  #   google_oauth2:
+  #     client_id: your_client_id
+  #     client_secret: your_client_secret
+  #   facebook:
+  #     app_id: your_app_id
+  #     app_secret: your_app_secret
+  #   twitter2:
+  #     api_key: your_api_key
+  #     api_secret: your_api_secret
+
+  # GitHub OAuth
+  if Rails.application.credentials.dig(:omniauth, :github, :client_id).present?
+    config.omniauth :github,
+      Rails.application.credentials.dig(:omniauth, :github, :client_id),
+      Rails.application.credentials.dig(:omniauth, :github, :client_secret),
+      scope: "user:email"
+  end
+
+  # Google OAuth2
+  if Rails.application.credentials.dig(:omniauth, :google_oauth2, :client_id).present?
+    config.omniauth :google_oauth2,
+      Rails.application.credentials.dig(:omniauth, :google_oauth2, :client_id),
+      Rails.application.credentials.dig(:omniauth, :google_oauth2, :client_secret),
+      scope: "userinfo.email,userinfo.profile"
+  end
+
+  # Facebook OAuth
+  if Rails.application.credentials.dig(:omniauth, :facebook, :app_id).present?
+    config.omniauth :facebook,
+      Rails.application.credentials.dig(:omniauth, :facebook, :app_id),
+      Rails.application.credentials.dig(:omniauth, :facebook, :app_secret),
+      scope: "email,public_profile"
+  end
+
+  # Twitter OAuth (OAuth 2.0)
+  if Rails.application.credentials.dig(:omniauth, :twitter2, :api_key).present?
+    config.omniauth :twitter2,
+      Rails.application.credentials.dig(:omniauth, :twitter2, :api_key),
+      Rails.application.credentials.dig(:omniauth, :twitter2, :api_secret),
+      scope: "tweet.read users.read"
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

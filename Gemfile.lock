@@ -161,6 +161,10 @@ GEM
       rails (>= 7.0.7.2)
       stimulus-rails (>= 1.2)
       turbo-rails (>= 1.2)
+    httparty (0.22.0)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     image_processing (1.14.0)
@@ -566,6 +570,7 @@ DEPENDENCIES
   devise!
   devise-i18n (~> 1.10)
   hotwire_combobox (~> 0.3)
+  httparty (~> 0.22.0)
   image_processing (~> 1.2)
   importmap-rails
   inline_svg (~> 1.6)

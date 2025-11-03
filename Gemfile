@@ -104,6 +104,9 @@ gem "local_time", "~> 3.0"
 # OEmbed support
 gem "ruby-oembed", "~> 0.18.0", require: "oembed"
 
+# HTTP client for API integrations
+gem "httparty", "~> 0.22.0"
+
 # Nokogiri security update
 gem "nokogiri", ">= 1.12.5"
 

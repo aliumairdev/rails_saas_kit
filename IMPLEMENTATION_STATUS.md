@@ -233,17 +233,49 @@ Comprehensive overview of all features implemented in this Rails SaaS Kit follow
 
 ### 7. Notifications
 
-#### ✓ Noticed Gem
+#### ✓ Noticed Gem Integration
 - **Status**: Complete
+- **Version**: v2.9.3
 - **Features**:
-  - Database notifications
+  - Database notifications with full history
   - Email notifications
-  - ActionCable (real-time)
-  - Multi-tenant support
+  - ActionCable (real-time push notifications)
+  - Multi-tenant support (account-scoped)
+  - Read/unread tracking
+  - Notification preferences per user
+- **Database Tables**:
+  - `noticed_events` - Event storage
+  - `noticed_notifications` - User notifications
+- **Models**:
+  - `Noticed::Event` - Base event model
+  - `Noticed::Notification` - User notification model
+  - Account-scoped with `belongs_to :account`
+- **Controllers**:
+  - `NotificationsController` - Index, mark as read, mark all as read
+  - `NotificationPreferencesController` - User preference management
+- **Mailers**:
+  - `NotificationMailer` - Email delivery
+  - Professional HTML templates with TailwindCSS styling
+- **Views**:
+  - `/notifications` - Notification list with pagination (Pagy)
+  - `/notification_preferences/edit` - Preference settings
+  - Navbar notification dropdown with unread badge
+- **Notification Types**:
+  - Review clicked
+  - Request limit warnings
+  - Payment failed
+  - Weekly summaries
+- **User Preferences**:
+  - Enable/disable email notifications
+  - Enable/disable in-app notifications
+  - Per-type notification controls
 - **Files**:
-  - `app/notifiers/application_notifier.rb`
+  - `config/initializers/noticed.rb` - Account scoping config
+  - `app/controllers/notifications_controller.rb`
+  - `app/controllers/notification_preferences_controller.rb`
+  - `app/mailers/notification_mailer.rb`
   - Views in `app/views/notifications/`
-- **UI**: Navbar dropdown
+- **Routes**: `/notifications`, `/notification_preferences/edit`
 - **Gem**: `noticed`
 
 ---
@@ -252,15 +284,53 @@ Comprehensive overview of all features implemented in this Rails SaaS Kit follow
 
 #### ✓ Announcement System
 - **Status**: Complete
-- **Purpose**: Notify users of new features
+- **Purpose**: Notify users of new features, updates, and improvements
 - **Features**:
-  - Unread indicator (red dot)
-  - Type categories (New, Update, Improvement, Fix)
-  - Admin creation via Madmin
+  - Publish/draft workflow
+  - Scheduled publishing (published_at timestamp)
+  - ActionText rich content (Trix editor)
   - User dismissal tracking
-- **Model**: `Announcement`
-- **Routes**: `/announcements`
-- **Admin**: `/madmin/announcements`
+  - Unread indicator in navbar (red dot)
+  - Type categories for visual distinction
+- **Announcement Types**:
+  - `info` - General announcements (blue)
+  - `warning` - Important notices (yellow)
+  - `success` - New features/improvements (green)
+- **Models**:
+  - `Announcement` - Main model with ActionText content
+  - `AnnouncementDismissal` - Join model for user dismissals
+- **Scopes**:
+  - `published` - Only published announcements
+  - `draft` - Unpublished announcements
+  - `by_kind` - Filter by type
+- **Methods**:
+  - `published?` - Check if announcement is live
+  - `dismissed_by?(user)` - Check if user dismissed
+  - `publish!` / `unpublish!` - Manage publishing state
+- **Database Tables**:
+  - `announcements` - Announcement data
+  - `announcement_dismissals` - User dismissal tracking
+  - `action_text_rich_texts` - Rich content storage
+- **Admin Interface**:
+  - Full CRUD via Madmin at `/madmin/announcements`
+  - Rich text editor for content
+  - Publish/unpublish actions
+  - Type selection
+- **User Interface**:
+  - "What's New" link in navbar
+  - Red dot indicator for unread announcements
+  - Timeline-style list view
+  - Dismiss button per announcement
+  - Icon-based type indicators
+- **Files**:
+  - `app/models/announcement.rb`
+  - `app/models/announcement_dismissal.rb`
+  - `app/controllers/announcement_dismissals_controller.rb`
+  - Views in `app/views/announcements/` (if exists)
+- **Routes**:
+  - `/announcements` - Public announcement list
+  - `/madmin/announcements` - Admin management
+  - `POST /announcement_dismissals` - Dismiss announcement
 
 ---
 
@@ -268,15 +338,41 @@ Comprehensive overview of all features implemented in this Rails SaaS Kit follow
 
 #### ✓ TailwindCSS
 - **Status**: Complete
-- **Version**: 4.0
+- **Version**: 4.3.0 (tailwindcss-ruby 4.1.13)
 - **Features**:
-  - Utility-first CSS
-  - JIT compiler
-  - Custom configuration
-  - Responsive design
-- **Gem**: `tailwindcss-rails`
-- **Config**: `app/assets/stylesheets/application.tailwind.css`
-- **Build**: `bin/rails tailwindcss:watch`
+  - Utility-first CSS framework
+  - Modern @theme configuration (Tailwind v4)
+  - Professional B2B SaaS color scheme
+  - Automatic CSS purging
+  - Responsive design utilities
+  - Dark mode support (optional)
+- **Color Palette**:
+  - Primary (Blue): 11 shades (#3b82f6 base)
+  - Accent (Cyan): 11 shades (#0ea5e9 base)
+  - Success (Green): Complete palette
+  - Warning (Yellow): Complete palette
+  - Error (Red): Complete palette
+  - Info (Indigo): Complete palette
+- **Components Styled**:
+  - Buttons (Primary, Secondary, Danger, Link)
+  - Forms (Inputs, Textareas, Selects, Checkboxes)
+  - Cards (Basic, with actions)
+  - Alerts (Success, Error, Warning, Info)
+  - Badges (Color-coded)
+  - Dropdowns (with Stimulus)
+  - Modals
+  - Tables (Responsive)
+  - Navigation bars
+  - Empty states
+  - Loading states
+  - Pagination
+- **Gem**: `tailwindcss-rails` v4.0+
+- **Config Files**:
+  - `app/assets/tailwind/application.css` - Main config with @theme
+  - `app/assets/stylesheets/application.css` - Manifest
+  - `app/assets/stylesheets/actiontext.css` - Trix editor
+- **Build**: `bin/rails tailwindcss:watch` (in Procfile.dev)
+- **Documentation**: `TAILWINDCSS.md`
 
 #### ✓ JavaScript (Hotwire Stack)
 - **Status**: Complete

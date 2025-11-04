@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-controller="theme" class="light">
   <head>
     <title><%= content_for(:title) || "Review Collector" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -71,9 +71,24 @@
                 <% end %>
               <% end %>
 
+              <%# Theme Toggle %>
+              <button type="button" data-action="click->theme#toggle" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md" title="Toggle theme">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+              </button>
+
               <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium", data: { turbo: false } %>
             <% else %>
               <%= link_to "Pricing", pricing_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+
+              <%# Theme Toggle %>
+              <button type="button" data-action="click->theme#toggle" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md" title="Toggle theme">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+              </button>
+
               <%= link_to "Sign In", new_user_session_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
               <%= link_to "Sign Up", new_user_registration_path, class: "bg-primary-600 text-white hover:bg-primary-700 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200" %>
             <% end %>

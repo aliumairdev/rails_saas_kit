@@ -8,3 +8,7 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/* Import theme files */
+@import "themes/light.css";
+@import "themes/dark.css";

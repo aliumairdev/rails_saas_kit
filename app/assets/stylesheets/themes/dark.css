@@ -1,0 +1,237 @@
+/* Dark Theme - Alternative dark color scheme */
+/* Optimized for low-light environments with proper contrast */
+
+.dark {
+  /* ============================================
+     PRIMARY COLORS - Main brand identity
+     Adjusted for dark backgrounds
+     ============================================ */
+  --color-primary-50: #172554;
+  --color-primary-100: #1e3a8a;
+  --color-primary-200: #1e40af;
+  --color-primary-300: #1d4ed8;
+  --color-primary-400: #2563eb;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #60a5fa;
+  --color-primary-700: #93c5fd;
+  --color-primary-800: #bfdbfe;
+  --color-primary-900: #dbeafe;
+  --color-primary-950: #eff6ff;
+
+  /* Primary 'on' colors */
+  --color-on-primary: #000000;
+  --color-on-primary-container: #dbeafe;
+
+  /* ============================================
+     SECONDARY COLORS - Supporting brand colors
+     ============================================ */
+  --color-secondary-50: #020617;
+  --color-secondary-100: #0f172a;
+  --color-secondary-200: #1e293b;
+  --color-secondary-300: #334155;
+  --color-secondary-400: #475569;
+  --color-secondary-500: #64748b;
+  --color-secondary-600: #94a3b8;
+  --color-secondary-700: #cbd5e1;
+  --color-secondary-800: #e2e8f0;
+  --color-secondary-900: #f1f5f9;
+  --color-secondary-950: #f8fafc;
+
+  /* Secondary 'on' colors */
+  --color-on-secondary: #000000;
+  --color-on-secondary-container: #f1f5f9;
+
+  /* ============================================
+     DANGER COLORS - Destructive actions, errors
+     ============================================ */
+  --color-danger-50: #450a0a;
+  --color-danger-100: #7f1d1d;
+  --color-danger-200: #991b1b;
+  --color-danger-300: #b91c1c;
+  --color-danger-400: #dc2626;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #f87171;
+  --color-danger-700: #fca5a5;
+  --color-danger-800: #fecaca;
+  --color-danger-900: #fee2e2;
+  --color-danger-950: #fef2f2;
+
+  /* Danger 'on' colors */
+  --color-on-danger: #000000;
+  --color-on-danger-container: #fee2e2;
+
+  /* ============================================
+     SUCCESS COLORS - Successful actions, confirmations
+     ============================================ */
+  --color-success-50: #052e16;
+  --color-success-100: #14532d;
+  --color-success-200: #166534;
+  --color-success-300: #15803d;
+  --color-success-400: #16a34a;
+  --color-success-500: #22c55e;
+  --color-success-600: #4ade80;
+  --color-success-700: #86efac;
+  --color-success-800: #bbf7d0;
+  --color-success-900: #dcfce7;
+  --color-success-950: #f0fdf4;
+
+  /* Success 'on' colors */
+  --color-on-success: #000000;
+  --color-on-success-container: #dcfce7;
+
+  /* ============================================
+     WARNING COLORS - Warnings, caution states
+     ============================================ */
+  --color-warning-50: #451a03;
+  --color-warning-100: #78350f;
+  --color-warning-200: #92400e;
+  --color-warning-300: #b45309;
+  --color-warning-400: #d97706;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #fbbf24;
+  --color-warning-700: #fcd34d;
+  --color-warning-800: #fde68a;
+  --color-warning-900: #fef3c7;
+  --color-warning-950: #fffbeb;
+
+  /* Warning 'on' colors */
+  --color-on-warning: #000000;
+  --color-on-warning-container: #78350f;
+
+  /* ============================================
+     INFO COLORS - Informational messages
+     ============================================ */
+  --color-info-50: #082f49;
+  --color-info-100: #0c4a6e;
+  --color-info-200: #075985;
+  --color-info-300: #0369a1;
+  --color-info-400: #0284c7;
+  --color-info-500: #0ea5e9;
+  --color-info-600: #38bdf8;
+  --color-info-700: #7dd3fc;
+  --color-info-800: #bae6fd;
+  --color-info-900: #e0f2fe;
+  --color-info-950: #f0f9ff;
+
+  /* Info 'on' colors */
+  --color-on-info: #000000;
+  --color-on-info-container: #e0f2fe;
+
+  /* ============================================
+     ACCENT COLORS - Highlights, special emphasis
+     ============================================ */
+  --color-accent-50: #4a044e;
+  --color-accent-100: #701a75;
+  --color-accent-200: #86198f;
+  --color-accent-300: #a21caf;
+  --color-accent-400: #c026d3;
+  --color-accent-500: #d946ef;
+  --color-accent-600: #e879f9;
+  --color-accent-700: #f0abfc;
+  --color-accent-800: #f5d0fe;
+  --color-accent-900: #fae8ff;
+  --color-accent-950: #fdf4ff;
+
+  /* Accent 'on' colors */
+  --color-on-accent: #000000;
+  --color-on-accent-container: #fae8ff;
+
+  /* ============================================
+     DARK BUTTON - Dark background buttons
+     (Lighter in dark mode)
+     ============================================ */
+  --color-dark-50: #030712;
+  --color-dark-100: #111827;
+  --color-dark-200: #1f2937;
+  --color-dark-300: #374151;
+  --color-dark-400: #4b5563;
+  --color-dark-500: #6b7280;
+  --color-dark-600: #9ca3af;
+  --color-dark-700: #d1d5db;
+  --color-dark-800: #e5e7eb;
+  --color-dark-900: #f3f4f6;
+  --color-dark-950: #f9fafb;
+
+  /* Dark button 'on' colors */
+  --color-on-dark: #000000;
+  --color-on-dark-container: #000000;
+
+  /* ============================================
+     LIGHT BUTTON - Light background buttons
+     (Darker in dark mode)
+     ============================================ */
+  --color-light-50: #262626;
+  --color-light-100: #404040;
+  --color-light-200: #525252;
+  --color-light-300: #737373;
+  --color-light-400: #a3a3a3;
+  --color-light-500: #d4d4d4;
+  --color-light-600: #e5e5e5;
+  --color-light-700: #f5f5f5;
+  --color-light-800: #fafafa;
+  --color-light-900: #fefefe;
+  --color-light-950: #ffffff;
+
+  /* Light button 'on' colors */
+  --color-on-light: #ffffff;
+  --color-on-light-container: #ffffff;
+
+  /* ============================================
+     DISABLED STATES - Disabled elements
+     ============================================ */
+  --color-disabled-bg: #1f2937;
+  --color-disabled-text: #6b7280;
+  --color-disabled-border: #374151;
+  --color-on-disabled: #6b7280;
+
+  /* ============================================
+     BASE COLORS - Foundational UI elements
+     Dark mode uses lighter colors for higher elevation
+     ============================================ */
+
+  /* Base backgrounds - Elevation system (lighter = higher) */
+  --color-base-bg-lowest: #0f172a;       /* Page background, lowest elevation */
+  --color-base-bg-low: #1e293b;          /* Cards, panels, low elevation */
+  --color-base-bg: #1e293b;              /* Default background */
+  --color-base-bg-high: #334155;         /* Elevated elements like modals */
+  --color-base-bg-highest: #475569;      /* Highest elevation (dropdowns, tooltips) */
+
+  /* Base text colors - Hierarchy */
+  --color-base-text: #f1f5f9;            /* Primary text */
+  --color-base-text-secondary: #94a3b8;  /* Secondary text */
+  --color-base-text-tertiary: #64748b;   /* Tertiary text, captions */
+  --color-base-text-disabled: #475569;   /* Disabled text */
+  --color-base-text-placeholder: #64748b; /* Placeholder text */
+
+  /* Base borders */
+  --color-base-border: #334155;          /* Default borders */
+  --color-base-border-hover: #475569;    /* Hovered borders */
+  --color-base-border-focus: #3b82f6;    /* Focused borders */
+  --color-base-border-disabled: #1e293b; /* Disabled borders */
+
+  /* Base dividers */
+  --color-base-divider: #334155;         /* Divider lines */
+  --color-base-divider-subtle: #1e293b;  /* Subtle dividers */
+
+  /* Base icons */
+  --color-base-icon: #94a3b8;            /* Default icons */
+  --color-base-icon-hover: #cbd5e1;      /* Hovered icons */
+  --color-base-icon-disabled: #475569;   /* Disabled icons */
+
+  /* Base overlays */
+  --color-base-overlay: rgba(0, 0, 0, 0.7);      /* Modal overlays */
+  --color-base-overlay-light: rgba(0, 0, 0, 0.3); /* Light overlays */
+
+  /* Base shadows */
+  --color-base-shadow: rgba(0, 0, 0, 0.3);       /* Default shadows */
+  --color-base-shadow-strong: rgba(0, 0, 0, 0.5); /* Strong shadows */
+
+  /* 'on' colors for base elements */
+  --color-on-base-bg: #f1f5f9;
+  --color-on-base-surface: #f1f5f9;
+}
+
+/* Dark theme metadata */
+.dark {
+  color-scheme: dark;
+}

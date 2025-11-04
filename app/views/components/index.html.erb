@@ -1,0 +1,235 @@
+<% content_for :title, "UI Components - Alerts, Notices & Toasts" %>
+
+<div class="max-w-6xl mx-auto">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Alerts & Notices</h1>
+    <p class="text-gray-600">Demonstration of alert, banner, and toast notification components</p>
+  </div>
+
+  <!-- Alerts Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Alerts</h2>
+    <p class="text-gray-600 mb-6">General alerts with context and optional actions</p>
+
+    <div class="space-y-6">
+      <%= render "shared/alert",
+        type: :default,
+        title: "General Alert",
+        message: "Additional text for context goes here" %>
+
+      <%= render "shared/alert",
+        type: :info,
+        title: "Info Alert",
+        message: "Additional text for context goes here" %>
+
+      <%= render "shared/alert",
+        type: :success,
+        title: "Success Alert",
+        message: "Additional text for context goes here" %>
+
+      <%= render "shared/alert",
+        type: :danger,
+        title: "Danger/Error Alert",
+        message: "Additional text for context goes here" %>
+
+      <%= render "shared/alert",
+        type: :warning,
+        title: "Warning Alert",
+        message: "Additional text for context goes here" %>
+    </div>
+  </section>
+
+  <!-- Alerts with Actions Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Alerts with Actions</h2>
+    <p class="text-gray-600 mb-6">Alerts with actionable links</p>
+
+    <div class="space-y-6">
+      <%= render "shared/alert",
+        type: :default,
+        title: "General Alert",
+        message: "Additional text for context goes here",
+        actions: [
+          { text: "View status", url: "#" },
+          { text: "Dismiss", url: "#" }
+        ] %>
+
+      <%= render "shared/alert",
+        type: :info,
+        title: "Info Alert",
+        message: "Additional text for context goes here",
+        actions: [
+          { text: "View status", url: "#" },
+          { text: "Dismiss", url: "#" }
+        ] %>
+
+      <%= render "shared/alert",
+        type: :success,
+        title: "Success Alert",
+        message: "Additional text for context goes here",
+        actions: [
+          { text: "View status", url: "#" },
+          { text: "Dismiss", url: "#" }
+        ] %>
+
+      <%= render "shared/alert",
+        type: :danger,
+        title: "Danger/Error Alert",
+        message: "Additional text for context goes here",
+        actions: [
+          { text: "View status", url: "#" },
+          { text: "Dismiss", url: "#" }
+        ] %>
+
+      <%= render "shared/alert",
+        type: :warning,
+        title: "Warning Alert",
+        message: "Additional text for context goes here",
+        actions: [
+          { text: "View status", url: "#" },
+          { text: "Dismiss", url: "#" }
+        ] %>
+    </div>
+  </section>
+
+  <!-- Notices/Banners Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Notices</h2>
+    <p class="text-gray-600 mb-6">Simple banner-style notices</p>
+
+    <div class="space-y-6">
+      <%= render "shared/banner",
+        type: :default,
+        message: "This is a general notice" %>
+
+      <%= render "shared/banner",
+        type: :info,
+        message: "This is a info notice" %>
+
+      <%= render "shared/banner",
+        type: :success,
+        message: "This is a success notice" %>
+
+      <%= render "shared/banner",
+        type: :danger,
+        message: "This is a danger notice" %>
+
+      <%= render "shared/banner",
+        type: :warning,
+        message: "This is a warning notice" %>
+    </div>
+  </section>
+
+  <!-- Toast Notifications Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Toast Notifications</h2>
+    <p class="text-gray-600 mb-6">
+      Toast notifications appear in the upper right corner of the page. Click the buttons below to trigger different types of toast notifications.
+    </p>
+
+    <div class="space-y-4">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">Basic Examples</h3>
+        <div class="flex flex-wrap gap-3">
+          <%= button_to "Basic Toast", components_toast_demo_path(toast_type: "basic"),
+            method: :post,
+            class: "px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors" %>
+
+          <%= button_to "Toast with Icon", components_toast_demo_path(toast_type: "with_icon"),
+            method: :post,
+            class: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" %>
+
+          <%= button_to "Success Toast", components_toast_demo_path(toast_type: "success"),
+            method: :post,
+            class: "px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors" %>
+
+          <%= button_to "Warning Toast", components_toast_demo_path(toast_type: "alert"),
+            method: :post,
+            class: "px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors" %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">Advanced Examples</h3>
+        <div class="flex flex-wrap gap-3">
+          <%= button_to "Toast with Link", components_toast_demo_path(toast_type: "with_link"),
+            method: :post,
+            class: "px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors" %>
+
+          <%= button_to "Auto-Dismiss Toast (5s)", components_toast_demo_path(toast_type: "auto_dismiss"),
+            method: :post,
+            class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-900 mb-3">Usage Examples</h3>
+
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-semibold text-gray-700 mb-2">Basic Toast from Controller:</h4>
+          <pre class="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto text-sm"><code>flash[:notice] = {
+  title: "Basic Example",
+  description: "Toast description goes here."
+}</code></pre>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold text-gray-700 mb-2">Toast with Icon:</h4>
+          <pre class="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto text-sm"><code>flash[:notice] = {
+  title: "Toast with icon",
+  description: "This is a toast description.",
+  icon_name: :notice  # Supported: :alert, :notice, :success, :default
+}</code></pre>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold text-gray-700 mb-2">Toast with Link:</h4>
+          <pre class="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto text-sm"><code>flash[:notice] = {
+  title: "Deployment successful",
+  description: "This is a toast description.",
+  icon_name: :success,
+  link_text: "View",
+  link_url: root_path
+}</code></pre>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold text-gray-700 mb-2">Auto-Dismissing Toast:</h4>
+          <pre class="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto text-sm"><code>flash[:notice] = {
+  title: "Auto-dismissing toast",
+  description: "This is a toast description.",
+  icon_name: :default,
+  dismissable: false,
+  dismiss_after: 5000  # milliseconds
+}</code></pre>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold text-gray-700 mb-2">Alert Partial:</h4>
+          <pre class="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto text-sm"><code>&lt;%= render "shared/alert",
+  type: :info,
+  title: "Alert Title",
+  message: "Alert message",
+  actions: [
+    { text: "View", url: "#" },
+    { text: "Dismiss", url: "#" }
+  ] %&gt;</code></pre>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold text-gray-700 mb-2">Banner Partial:</h4>
+          <pre class="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto text-sm"><code>&lt;%= render "shared/banner",
+  type: :success,
+  message: "This is a success notice" %&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Dashboard Link -->
+  <div class="mt-8 pt-8 border-t border-gray-200">
+    <%= link_to "← Back to Dashboard", dashboard_path, class: "text-blue-600 hover:text-blue-700 font-medium" %>
+  </div>
+</div>

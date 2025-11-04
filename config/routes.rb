@@ -29,6 +29,10 @@ Rails.application.routes.draw do
   # Pricing
   get "pricing", to: "pricing#index"
 
+  # Components Demo
+  get "components", to: "components#index"
+  post "components/toast_demo", to: "components#toast_demo", as: :components_toast_demo
+
   # Review tracking (public, no auth required)
   get "r/:token", to: "review_clicks#show", as: :review_click
 

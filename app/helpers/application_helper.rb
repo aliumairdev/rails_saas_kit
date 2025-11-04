@@ -29,4 +29,33 @@ module ApplicationHelper
     return false unless user_signed_in? && Current.account
     current_user.account_member?(Current.account)
   end
+
+  # Render toast notifications from flash messages
+  def render_toast_notifications
+    return unless flash[:notice] || flash[:alert] || flash[:toast]
+
+    toasts = []
+
+    # Handle simple string notices/alerts
+    if flash[:notice].is_a?(String)
+      toasts << { title: "Notice", description: flash[:notice], icon_name: :notice }
+    elsif flash[:notice].is_a?(Hash)
+      toasts << flash[:notice].symbolize_keys
+    end
+
+    if flash[:alert].is_a?(String)
+      toasts << { title: "Alert", description: flash[:alert], icon_name: :alert }
+    elsif flash[:alert].is_a?(Hash)
+      toasts << flash[:alert].symbolize_keys
+    end
+
+    # Handle custom toast flash
+    if flash[:toast].is_a?(Hash)
+      toasts << flash[:toast].symbolize_keys
+    elsif flash[:toast].is_a?(Array)
+      toasts.concat(flash[:toast].map(&:symbolize_keys))
+    end
+
+    safe_join(toasts.map { |toast_data| render("shared/toast", **toast_data) })
+  end
 end

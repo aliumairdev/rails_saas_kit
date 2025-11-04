@@ -1,0 +1,37 @@
+<%
+  # Banner Component (Notices)
+  # Usage:
+  #   <%= render "shared/banner", type: :info, message: "This is a notice message" %>
+  #
+  # Parameters:
+  #   type: :default, :info, :success, :danger, :warning (default: :default)
+  #   message: String (required)
+
+  type ||= :default
+  message ||= "Notice"
+
+  type_classes = {
+    default: "",
+    info: "banner-info",
+    success: "banner-success",
+    danger: "banner-danger",
+    warning: "banner-warning"
+  }
+
+  banner_class = "banner #{type_classes[type.to_sym]}"
+%>
+
+<div class="<%= banner_class %>" role="alert">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <% if type.to_sym == :success %>
+      <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+    <% elsif type.to_sym == :danger %>
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+    <% elsif type.to_sym == :warning %>
+      <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+    <% else %>
+      <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
+    <% end %>
+  </svg>
+  <p class="leading-normal"><%= message %></p>
+</div>

@@ -1,0 +1,43 @@
+require "test_helper"
+
+class <%= class_name %>ClientTest < ActiveSupport::TestCase
+  setup do
+    @client = <%= class_name %>Client.new(token: "test_token")
+  end
+
+<% if methods_to_generate.any? %>
+<% methods_to_generate.each do |method| %>
+  test "<%= method[:name] %> makes <%= http_method_for_type(method[:type]).upcase %> request" do
+    stub_request(:<%= http_method_for_type(method[:type]) %>, /<%= base_url.gsub("https://", "").gsub("http://", "") %>.*/)
+      .to_return(status: 200, body: {success: true}.to_json, headers: {"Content-Type" => "application/json"})
+
+<% if method[:type] == "show" || method[:type] == "update" || method[:type] == "destroy" %>
+    response = @client.<%= method[:name] %>(1)
+<% elsif method[:type] == "create" %>
+    response = @client.<%= method[:name] %>(name: "Test")
+<% else %>
+    response = @client.<%= method[:name] %>
+<% end %>
+
+    assert_equal true, response["success"]
+  end
+
+<% end %>
+<% else %>
+  test "client is properly initialized" do
+    assert_not_nil @client
+    assert_instance_of <%= class_name %>Client, @client
+  end
+
+  # Add your tests here
+  # Example:
+  #
+  # test "index returns list of resources" do
+  #   stub_request(:get, "<%= base_url %>/resources")
+  #     .to_return(status: 200, body: [{id: 1, name: "Test"}].to_json, headers: {"Content-Type" => "application/json"})
+  #
+  #   response = @client.index
+  #   assert_equal 1, response.first["id"]
+  # end
+<% end %>
+end

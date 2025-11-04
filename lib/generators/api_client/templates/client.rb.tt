@@ -1,0 +1,42 @@
+class <%= class_name %>Client < ApplicationClient
+  BASE_URI = "<%= base_url %>"
+
+  # Initialize the client with an API token
+  # Example: client = <%= class_name %>Client.new(token: "your_api_token")
+  def initialize(token: nil, **options)
+    super
+  end
+
+<% if methods_to_generate.any? %>
+  # Generated API methods
+<% methods_to_generate.each do |method| %>
+  # <%= method[:type].capitalize %> <%= method[:name] %>
+  <%= method_signature_for_type(method[:name], method[:type]) %>    <%= http_method_for_type(method[:type]) %> <%= method_params_for_type(method[:type]) %>
+  end
+
+<% end %>
+<% else %>
+  # Add your API methods here
+  # Example:
+  #
+  # def index
+  #   get "/resources"
+  # end
+  #
+  # def show(id)
+  #   get "/resources/#{id}"
+  # end
+  #
+  # def create(**params)
+  #   post "/resources", body: params
+  # end
+  #
+  # def update(id, **params)
+  #   put "/resources/#{id}", body: params
+  # end
+  #
+  # def destroy(id)
+  #   delete "/resources/#{id}"
+  # end
+<% end %>
+end

@@ -1,5 +1,12 @@
 # Rails SaaS Starter Kit
 
+[![CI](https://github.com/aliumairdev/rails_saas_kit/workflows/CI/badge.svg)](https://github.com/aliumairdev/rails_saas_kit/actions/workflows/ci.yml)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![Ruby Version](https://img.shields.io/badge/ruby-3.4%2B-red.svg)](https://www.ruby-lang.org/)
+[![Rails Version](https://img.shields.io/badge/rails-8.0%2B-red.svg)](https://rubyonrails.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Made with Love](https://img.shields.io/badge/Made%20with-❤-ff69b4.svg)](https://github.com/aliumairdev/rails_saas_kit)
+
 A **production-ready Rails 8 SaaS starter kit** with multi-tenancy, authentication, 2FA, payments, and all essential features to launch your SaaS product quickly. Focus on your business logic, not infrastructure.
 
 ## 🚀 Features

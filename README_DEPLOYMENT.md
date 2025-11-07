@@ -364,7 +364,16 @@ This project is licensed under the GNU Affero General Public License v3.0 (AGPL-
 
 ## 🤝 Contributing
 
-This is a private project. For questions or support, contact the development team.
+We welcome contributions from the community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) guide for:
+- Code of Conduct
+- How to report bugs
+- How to suggest features
+- Development workflow
+- Pull request process
+- Coding standards
+- Testing guidelines
+
+For questions or support, please open a GitHub issue or discussion.
 
 ---
 

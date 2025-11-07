@@ -1,4 +1,25 @@
 # Rails SaaS Starter Kit
+## ⚠️ Disclaimer
+
+THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. 
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY 
+ARISING FROM THE USE OF THIS SOFTWARE.
+
+Use at your own risk.
+```
+
+### 2. Add NOTICE File
+
+Create a `NOTICE` file in your repo root:
+```
+IMPORTANT NOTICE
+
+This software is provided under the AGPL-3.0 license with NO WARRANTIES.
+The authors and contributors are not liable for any damages, losses, or 
+issues arising from the use of this software.
+
+By using this software, you accept all risks associated with its use.
+
 
 A **production-ready Rails 8 SaaS starter kit** with multi-tenancy, authentication, 2FA, payments, and all essential features to launch your SaaS product quickly. Focus on your business logic, not infrastructure.
 

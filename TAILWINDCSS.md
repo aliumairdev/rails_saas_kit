@@ -1,6 +1,6 @@
 # TailwindCSS Guide
 
-Complete guide to TailwindCSS setup, configuration, and usage in Rails SaaS Kit following Jumpstart Pro patterns.
+Complete guide to TailwindCSS setup, configuration, and usage in Rails SaaS Kit following modern CSS best practices.
 
 ## Table of Contents
 

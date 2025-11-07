@@ -360,7 +360,7 @@ APP_HOST=yourdomain.com
 
 ## 📄 License
 
-Proprietary - All rights reserved
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0). See LICENSE file for details.
 
 ## 🤝 Contributing
 

@@ -440,7 +440,22 @@ curl -H "Authorization: Bearer your_api_token" https://example.com/api/v1/campai
 
 ## 📝 License
 
-This project is available for commercial use.
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+
+### What this means:
+- ✅ You can use this code for personal and commercial projects
+- ✅ You can modify and distribute the code
+- ✅ You must disclose your source code when you distribute or provide the software as a service
+- ✅ You must include the original license and copyright notice
+- ✅ Changes must be documented and also licensed under AGPL-3.0
+
+### Key AGPL-3.0 Requirements:
+The AGPL-3.0 license requires that if you run a modified version of this software as a web service (SaaS), you must make your modified source code available to users of that service.
+
+For full license details, see the LICENSE file or visit https://www.gnu.org/licenses/agpl-3.0.html
+
+### Attribution
+See [ATTRIBUTION.md](ATTRIBUTION.md) for credits and acknowledgments of the open-source projects this kit is built upon.
 
 ## 🆘 Support
 

@@ -1,0 +1,91 @@
+name: 🚀 Feature Request
+description: Suggest a new feature or enhancement
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please fill out the form below to help us understand your idea.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Is your feature request related to a problem?
+      description: A clear description of the problem you're trying to solve
+      placeholder: I'm frustrated when... / It would be helpful if...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen
+      placeholder: I would like to be able to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Describe alternatives you've considered
+      description: Any alternative solutions or features you've considered
+      placeholder: I've considered... / Another approach would be...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Low - Nice to have
+        - Medium - Would improve workflow
+        - High - Critical for my use case
+    validations:
+      required: true
+
+  - type: dropdown
+    id: willing-to-contribute
+    attributes:
+      label: Are you willing to contribute?
+      description: Would you be willing to submit a PR for this feature?
+      options:
+        - "Yes, I can work on this"
+        - "Yes, but I need guidance"
+        - "No, but I can help test"
+        - "No, just suggesting"
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: Describe how you would use this feature
+      placeholder: In my SaaS application, users need to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add any other context, mockups, or examples about the feature request
+      placeholder: Here's a mockup... / Similar to how X does it...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: This feature aligns with the project's goals
+          required: true
+        - label: I have provided enough context to understand the feature
+          required: true

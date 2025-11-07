@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/aliumairdev/rails_saas_kit/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📚 Documentation
+    url: https://github.com/aliumairdev/rails_saas_kit#readme
+    about: Read the comprehensive documentation and guides

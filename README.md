@@ -25,7 +25,7 @@ By using this software, you accept all risks associated with its use.
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Ruby Version](https://img.shields.io/badge/ruby-3.4%2B-red.svg)](https://www.ruby-lang.org/)
 [![Rails Version](https://img.shields.io/badge/rails-8.0%2B-red.svg)](https://rubyonrails.org/)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](wiki/CONTRIBUTING.md)
 [![Made with Love](https://img.shields.io/badge/Made%20with-❤-ff69b4.svg)](https://github.com/aliumairdev/rails_saas_kit)
 
 A **production-ready Rails 8 SaaS starter kit** with multi-tenancy, authentication, 2FA, payments, and all essential features to launch your SaaS product quickly. Focus on your business logic, not infrastructure.
@@ -372,6 +372,22 @@ kamal deploy
 
 ## 📚 Documentation
 
+### 📖 Wiki Documentation
+
+Comprehensive documentation is available in the [`wiki/`](wiki/) directory:
+
+- **[Home](wiki/Home.md)** - Complete documentation index
+- **[API Documentation](wiki/API_DOCUMENTATION.md)** - API reference and endpoints
+- **[API Clients](wiki/API_CLIENTS.md)** - API client usage
+- **[Deployment Guide](wiki/DEPLOYMENT.md)** - Deployment instructions
+- **[Components Guide](wiki/COMPONENTS_README.md)** - UI components
+- **[JavaScript Guide](wiki/JAVASCRIPT.md)** - JavaScript implementation
+- **[TailwindCSS Guide](wiki/TAILWINDCSS.md)** - Styling and CSS
+- **[OAuth Setup](wiki/OAUTH_SETUP.md)** - OAuth configuration
+- **[Testing Documentation](wiki/TESTING_ROADMAP.md)** - Testing strategy
+- **[Contributing Guidelines](wiki/CONTRIBUTING.md)** - How to contribute
+- **[Changelog](wiki/CHANGELOG.md)** - Version history
+
 ### Key Models
 
 - **User** - Has person name, prefixed IDs, 2FA methods
@@ -483,7 +499,7 @@ The AGPL-3.0 license requires that if you run a modified version of this softwar
 For full license details, see the LICENSE file or visit https://www.gnu.org/licenses/agpl-3.0.html
 
 ### Attribution
-See [ATTRIBUTION.md](ATTRIBUTION.md) for credits and acknowledgments of the open-source projects this kit is built upon.
+See [ATTRIBUTION.md](wiki/ATTRIBUTION.md) for credits and acknowledgments of the open-source projects this kit is built upon.
 
 ## 🆘 Support
 

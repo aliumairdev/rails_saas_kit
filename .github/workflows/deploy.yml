@@ -1,0 +1,75 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    # Only run on main branch pushes, not on PRs
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+
+    environment:
+      name: production
+      url: https://your-app.com
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      # Option 1: Deploy with Kamal (if using Kamal)
+      - name: Deploy with Kamal
+        run: |
+          # Install Kamal dependencies
+          # gem install kamal
+          # kamal deploy
+          echo "Configure Kamal deployment here"
+        env:
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # Option 2: Deploy to Heroku (if using Heroku)
+      # - name: Deploy to Heroku
+      #   uses: akhileshns/heroku-deploy@v3.13.15
+      #   with:
+      #     heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+      #     heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+      #     heroku_email: ${{ secrets.HEROKU_EMAIL }}
+
+      # Option 3: Deploy to custom server via SSH
+      # - name: Deploy via SSH
+      #   uses: appleboy/ssh-action@v1.0.0
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     script: |
+      #       cd /var/www/rails_saas_kit
+      #       git pull origin main
+      #       bundle install
+      #       bin/rails db:migrate
+      #       sudo systemctl restart puma
+
+      - name: Notify deployment
+        if: success()
+        run: echo "Deployment successful!"
+
+      - name: Notify failure
+        if: failure()
+        run: echo "Deployment failed!"
+
+# Uncomment and configure notification steps if needed:
+# - name: Slack notification
+#   uses: 8398a7/action-slack@v3
+#   with:
+#     status: ${{ job.status }}
+#     webhook_url: ${{ secrets.SLACK_WEBHOOK }}

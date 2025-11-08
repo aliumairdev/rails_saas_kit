@@ -1,0 +1,59 @@
+name: ❓ Question
+description: Ask a question about the project
+title: "[Question]: "
+labels: ["question"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question? We're here to help! Please check the documentation first, then fill out the form below.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What would you like to know?
+      placeholder: How do I...? / Can this project...? / What's the best way to...?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Any additional context that might help us answer your question
+      placeholder: I'm trying to... / I've already tried... / My use case is...
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-tried
+    attributes:
+      label: What have you tried?
+      description: Have you tried anything to solve this yourself?
+      placeholder: I looked at... / I tried... / I searched for...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: documentation-checked
+    attributes:
+      label: Have you checked the documentation?
+      description: Please check the docs before asking
+      options:
+        - "Yes, I checked the docs"
+        - "No, I'll check them first"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: This is not a bug report or feature request (use the appropriate template instead)
+          required: true

@@ -28,7 +28,7 @@ By using this software, you accept all risks associated with its use.
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Made with Love](https://img.shields.io/badge/Made%20with-❤-ff69b4.svg)](https://github.com/aliumairdev/rails_saas_kit)
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="aliumairden" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/aliumairden)
 
 A **production-ready Rails 8 SaaS starter kit** with multi-tenancy, authentication, 2FA, payments, and all essential features to launch your SaaS product quickly. Focus on your business logic, not infrastructure.
 
